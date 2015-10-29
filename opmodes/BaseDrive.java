@@ -45,15 +45,14 @@ import com.qualcomm.robotcore.util.Range;
  */
 public class BaseDrive extends OpMode {
 
-    DcMotor motorTopR;
-    DcMotor motorTopL;
     DcMotor motorBotR;
     DcMotor motorBotL;
-
+    Servo armTurn;
     @Override
     public void init()  {
         motorBotR = hardwareMap.dcMotor.get("motorBotR");
         motorBotL = hardwareMap.dcMotor.get("motorBotL");
+        armTurn = hardwareMap.servo.get("armTurn");
     }
     @Override
     public void start() {
@@ -64,9 +63,16 @@ public class BaseDrive extends OpMode {
         if(Math.abs(gamepad1.left_stick_y) > .05 || Math.abs(gamepad1.right_stick_y)> .05){
             motorBotL.setPower(-gamepad1.left_stick_y);
             motorBotR.setPower(gamepad1.right_stick_y);
+            armTurn.setDirection(Servo.Direction.REVERSE);
+            armTurn.setPosition(-100.0);
         }else{
             motorBotL.setPower(0);
             motorBotR.setPower(0);
+        }
+        if(gamepad2.left_bumper == true){
+            armTurn.setPosition(1.0);
+        }else if(gamepad2.right_bumper == true){
+            armTurn.setPosition(0.0);
         }
     }
     @Override

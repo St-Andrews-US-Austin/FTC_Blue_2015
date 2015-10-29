@@ -45,7 +45,7 @@ import com.qualcomm.robotcore.util.Range;
  * Enables control of the robot via the gamepad.
  * NOTE: This op mode will not work with the NXT Motor Controllers. Use an Nxt op mode instead.
  */
-public class Test extends OpMode {
+public class RunRobot extends OpMode {
 
     DcMotor motorTopR;
     DcMotor motorTopL;
@@ -70,8 +70,8 @@ public class Test extends OpMode {
     @Override
     public void loop() {
         if (Math.abs(gamepad1.left_stick_y) > .05 || Math.abs(gamepad1.right_stick_y) > .05) {
-            motorBotL.setPower(-gamepad1.left_stick_y);
-            motorBotR.setPower(gamepad1.right_stick_y);
+            motorBotL.setPower(gamepad1.left_stick_y);
+            motorBotR.setPower(-gamepad1.right_stick_y);
 
         } else {
             motorBotL.setPower(0);
@@ -90,14 +90,14 @@ public class Test extends OpMode {
                 }
             }
         }else{
-            servo.setPosition(0.50);
+            servo.setPosition(0.55);
         }
 
         System.out.println(servo.getPosition());
-   //     }else{
-           // servo.setPosition(((gamepad2.left_stick_y) + 1) / 2 + 0.17);
+        //     }else{
+        // servo.setPosition(((gamepad2.left_stick_y) + 1) / 2 + 0.17);
 
-       // }
+        // }
 
         if(gamepad2.left_stick_button == true){
             if(slowMode == true){
